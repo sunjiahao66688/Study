@@ -49,4 +49,14 @@ response = agent.invoke({
         }
     ]
 })
-print(response)
+from langchain_core.messages import AIMessage,HumanMessage,ToolMessage
+for i in response["messages"]:
+    if isinstance(i,HumanMessage):
+        print(f"Human：{i.content}")
+    elif isinstance(i,AIMessage):
+        print(f"AI：{i.content}")
+    elif isinstance(i,ToolMessage):
+        print(f"Tool：{i.content}")
+    else:
+        pass
+    print()
