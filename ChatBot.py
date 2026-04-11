@@ -7,13 +7,16 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-DEEPSEEK_API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("API_KEY")
+BASE_URL = os.getenv("BASE_URL")
+MODEL = os.getenv("MODEL")
+SYSTEM_PROMPT = input("System：")
 store = {}
 
 def get_session_history(session_id):
     if session_id not in store:
         store[session_id] = InMemoryChatMessageHistory()
-        store[session_id].add_message(SystemMessage(content=os.getenv("SYSTEM_PROMPT")))
+        store[session_id].add_message(SystemMessage(content=SYSTEM_PROMPT))
     return store[session_id]
     
 def trim_history(session_id,max_rounds = 3):
@@ -29,18 +32,23 @@ def trim_history(session_id,max_rounds = 3):
     history.messages = system_msgs + other_msgs
     
 model = ChatOpenAI(
-    model = "deepseek-chat",
-    api_key = DEEPSEEK_API_KEY,
-    base_url = "https://api.deepseek.com/v1",
-    temperature = 0.7
+    model = MODEL,
+    api_key = API_KEY,
+    base_url = BASE_URL,
+    temperature = 0.7,
 )
 
 chain = RunnableWithMessageHistory(model, get_session_history)
 
 
-session_config = {"configurable": {"session_id": "user-123"}}
+session_config = {
+    "configurable": {
+        "session_id": "user-123"
+    }
+}
 while True:
     res = chain.stream([HumanMessage(content=input("User："))], config=session_config)
+    print("Assistant：",end="")
     for i in res:
         print(i.content,end="")
     print()
