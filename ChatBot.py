@@ -4,9 +4,7 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage,AIMessage,HumanMessage
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
+import Config
 API_KEY = os.getenv("API_KEY")
 BASE_URL = os.getenv("BASE_URL")
 MODEL = os.getenv("MODEL")

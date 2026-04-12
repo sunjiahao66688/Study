@@ -1,7 +1,4 @@
-from dotenv import load_dotenv
-
-load_dotenv()
-
+import Config
 from langchain.tools import tool
 
 @tool
