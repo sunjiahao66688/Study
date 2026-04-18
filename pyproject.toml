@@ -8,6 +8,7 @@ dependencies = [
     "langchain>=1.2.15",
     "langchain-deepseek>=1.0.1",
     "langchain-openai>=1.1.12",
+    "pydantic>=2.12.5",
     "python-dotenv>=1.2.2",
     "transformers>=5.5.3",
 ]

@@ -904,6 +904,7 @@ dependencies = [
     { name = "langchain" },
     { name = "langchain-deepseek" },
     { name = "langchain-openai" },
+    { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "transformers" },
 ]
@@ -913,6 +914,7 @@ requires-dist = [
     { name = "langchain", specifier = ">=1.2.15" },
     { name = "langchain-deepseek", specifier = ">=1.0.1" },
     { name = "langchain-openai", specifier = ">=1.1.12" },
+    { name = "pydantic", specifier = ">=2.12.5" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
     { name = "transformers", specifier = ">=5.5.3" },
 ]
