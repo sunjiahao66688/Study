@@ -1,6 +1,6 @@
 import Config
 from langchain.tools import tool
-
+from langchain_core.messages import AIMessage,HumanMessage,ToolMessage
 @tool
 def getWeather(location):
     """
@@ -40,20 +40,9 @@ agent = create_agent(
 
 response = agent.invoke({
     "messages" : [
-        {
-            "role":"user",
-            "content":f"今天{input("Loc：")}的天气怎么样?帮我把天气记到笔记里，标注上准确日期"
-        }
+        HumanMessage(f"今天{input("Loc：")}的天气怎么样?帮我把天气记到笔记里，标注上准确日期")
     ]
 })
-from langchain_core.messages import AIMessage,HumanMessage,ToolMessage
+
 for i in response["messages"]:
-    if isinstance(i,HumanMessage):
-        print(f"Human：{i.content}")
-    elif isinstance(i,AIMessage):
-        print(f"AI：{i.content}")
-    elif isinstance(i,ToolMessage):
-        print(f"Tool：{i.content}")
-    else:
-        pass
-    print()
+    i.pretty_print()
